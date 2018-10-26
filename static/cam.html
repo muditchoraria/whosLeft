@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Codefundoo | Camera</title>
+    <style>
+        html, body { width: 100%; height: 100% }
+body { background: linear-gradient(to right, rgb(56, 196, 98), rgb(211, 200, 40)) repeat-y }
+.text {
+    font-size: 20px;
+}
+body > video
+{
+  width: 90vw;
+  height: 80%;
+  position: absolute;
+  top: 37%;
+  left: 0;
+  margin: 5vw 0 0 5vw;
+  background: #000 no-repeat center;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+body > h1
+{
+  position: absolute;
+  /* top: 50%;
+  left: 50%; */
+  display: block;
+  vertical-align: middle;
+  text-align: center;
+  font-family: Arial;
+  color: rgb(0, 0, 0);
+  text-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+}
+    </style>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+    <center>
+        <h1 style="font-weight: bold;font-size: 35px;">Setup Your Camera</h1><br><br>
+    </center>
+    
+    <video width="500" height="500" id="myVideo" autoplay></video>
+    <center>
+        <br>
+        <input type="text" id="location" class="form-control" style="max-width: 250px;" placeholder = "Enter your Location" required><br>
+        <input type="submit" id="submit" class="btn btn-primary form-control" style="max-width: 250px;">
+    </center><br>
+    <div class="text-center">
+        <span class="text"><p>Status:</p></span>
+        <span class="text" id="status"></span>
+    </div>
+
+<center>
+	<a href="./index.html"><button class="btn btn-primary">Home</button></a>
+<a href="./panel.html"><button class="btn btn-primary">Monitoring Panel</button></a>
+</center>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+        let v = document.getElementById("myVideo");
+
+//create a canvas to grab an image for upload
+let imageCanvas = document.createElement('canvas');
+let imageCtx = imageCanvas.getContext("2d");
+
+//Add file blob to a form and post
+function postFile(file) {
+    let formdata = new FormData();
+    formdata.append("image", file);
+    let xhr = new XMLHttpRequest();
+    xhr.open('POST', 'http://localhost:5000/image', true);
+    xhr.onload = function () {
+        if (this.status === 200)
+            console.log(this.response);
+        else
+            console.error(xhr);
+    };
+    xhr.send(formdata);
+}
+
+//Get the image from the canvas
+function sendImagefromCanvas() {
+
+    //Make sure the canvas is set to the current video size
+    imageCanvas.width = v.videoWidth;
+    imageCanvas.height = v.videoHeight;
+
+    imageCtx.drawImage(v, 0, 0, v.videoWidth, v.videoHeight);
+
+    //Convert the canvas to blob and post the file
+    imageCanvas.toBlob(postFile, 'image/jpeg');
+}
+
+// Take a picture on click
+// v.onclick = function () {
+//     console.log('click');
+//     sendImagefromCanvas();
+// };
+
+setInterval(()=> {
+    sendImagefromCanvas();
+}, 2);
+
+window.onload = function () {
+
+    //Get camera video
+    navigator.mediaDevices.getUserMedia({ video: { width: 1280, height: 720 }, audio: false })
+        .then(stream => {
+            v.srcObject = stream;
+        })
+        .catch(err => {
+            console.log('navigator.getUserMedia error: ', err)
+        });
+
+};
+    </script>
+    <script>
+        const status = document.getElementById("status");
+        status.innerHTML = "<p>" + "undefined" + "</p>";
+    </script>
+</body>
+</html>
