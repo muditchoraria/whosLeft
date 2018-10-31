@@ -4,3 +4,6 @@ itsdangerous==0.24
 Jinja2==2.10
 MarkupSafe==1.0
 Werkzeug==0.14.1
+dlib
+opencv-python==3.4.2.17
+

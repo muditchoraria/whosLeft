@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Codefundoo</title>
+    <style>
+        /* 
+Use https://bennettfeely.com/clippy for generating clip-paths automatically
+*/
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+html, body {
+	font-family: 'Montserrat Alternates', sans-serif;
+}
+
+#stripes {
+	height: 100vh;
+	background: linear-gradient(150deg, #53f 15%, #05d5ff 70%, #a6ffcb 94%);
+	clip-path: polygon(100% 0, 100% 70%, 0 99%, 0 0);
+	display: grid;
+	grid-template-columns: repeat(12, 1fr);
+	grid-template-rows: repeat(12, 1fr);
+}
+
+#stripes :nth-child(1) {
+	grid-area: 1 / 1 / span 4 / span 2;
+	background-color: #53f;
+	clip-path: polygon(0 0, 100% 0%, 100% 60%, 0% 100%);
+}
+
+#stripes :nth-child(2) {
+	grid-area: 1 / 3 / span 3 / span 2;
+	background-color: #4553ff;
+	clip-path: polygon(0 0, 100% 0%, 100% 74%, 0% 100%);
+	transform: translateY(-30px);
+}
+
+#stripes :nth-child(3) {
+	grid-area: 1 / 5 / span 2 / span 2;
+	background-color: #4f40ff;
+	clip-path: polygon(0 0, 100% 0, 99% 5%, 0 70%);
+}
+
+#stripes :nth-child(4) {
+	grid-area: 3 / 11 / span 3 / span 2;
+	clip-path: polygon(0 23%, 100% 0%, 100% 77%, 0% 100%);
+	background-color: #0dcfff;
+}
+
+#stripes :nth-child(5) {
+	grid-area: 8 / 1 / span 5 / span 4;
+	clip-path: polygon(0 23%, 100% 0%, 100% 80%, 0% 100%);
+	transform: translateY(10px);
+	background-color: #1fa2ff;
+}
+
+h1 {
+	color: white;
+	position: absolute;
+	top: 10px;
+	margin: 10px;
+	font-size: 32px;
+}
+
+    </style>
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+    <div id="stripes">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    
+    <h1 style="margin-left:20%;margin-top: 20%;font-weight: bold;font-size: 50px">Whos Left - Leave No One Behind</h1>
+    
+    <div class="container">
+            <div class="jumbotron">
+              <p style="font-weight: bold;font-size: 30px;" class="text-center">Our Idea</p><br>      
+              <p>Our project aims at solving the most basic problem during times of disaster, i.e., to ensure that nobody is left behind. During the calamity, the disaster management agencies often do not have accurate information on how many people are stuck somewhere and haven’t been taken to the nearest safe place. 
+                Our solution is deploying an inexpensive camera module at various buildings such as residences, malls, offices, airports, etc. This doesn’t include functionalities such as thermal imagining due to reasons such as unavailability and opaqueness to such instruments offered by walls. 
+                 We offer a simple fix to this problem. Our camera module will be placed at the entry and exit points of the buildings such that all the people entering or exiting is accounted for. This data will be sent to a server that maintains the count of the people still inside. However, in a case of emergency, it is a matter of ensuring whether a building has been evacuated or not.</p>
+	<center>
+	<a href="./static/cam.html"><button class="btn btn-primary">Set your Camera</button></a>
+<a href="./panel.html"><button class="btn btn-primary">Monitoring Panel</button></a>
+</center>
+            </div>   
+          </div><br><br>
+
+
+</body>
+</html>
